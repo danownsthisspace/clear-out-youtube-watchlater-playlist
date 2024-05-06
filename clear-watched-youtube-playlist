@@ -1,3 +1,5 @@
+// Not working yet
+
 const watchPercentage = 50; // only delete videos that you have watched half or more of
 const playlistVideoRenderers = document.querySelectorAll('ytd-playlist-video-renderer');
 
