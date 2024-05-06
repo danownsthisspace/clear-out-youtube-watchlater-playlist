@@ -1,0 +1,27 @@
+const watchPercentage = 50; // only delete videos that you have watched half or more of
+const playlistVideoRenderers = document.querySelectorAll('ytd-playlist-video-renderer');
+
+function processVideoRenderer(videoRenderer) {
+    const progressElement = videoRenderer.querySelector('#progress');
+  
+    if (progressElement) {
+        const progressWidth = parseFloat(progressElement.style.width) || 0;
+
+        if (progressWidth > watchPercentage) {
+            videoRenderer.querySelector('.style-scope .ytd-playlist-video-list-renderer #button').click();
+            document.querySelector('#items > ytd-menu-service-item-renderer:nth-child(3) > tp-yt-paper-item').click();
+        }
+    }
+}
+
+let currentIndex = 0;
+function processNextRenderer() {
+    if (currentIndex < playlistVideoRenderers.length) {
+        processVideoRenderer(playlistVideoRenderers[currentIndex]);
+        currentIndex++;
+        setTimeout(processNextRenderer, 500); // Delay each iteration by 0.5 seconds
+    }
+}
+
+// Start processing the video renderers
+processNextRenderer();
